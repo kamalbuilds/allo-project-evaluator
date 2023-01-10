@@ -43,8 +43,6 @@ const ProfileDetail = ({
   const isMobile = useMediaQuery(768);
   const py = isMobile ? "py-2" : "py-6";
 
-  console.log("Profile", profile)
-
   return (
     <div className="pb-10">
 

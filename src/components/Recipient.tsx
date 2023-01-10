@@ -8,6 +8,9 @@ import { cn } from '../../lib/utils';
 import { Metadata, TNewApplicationResponse } from '@/types/types';
 import Banner from './Banner';
 import { Web3Button } from '@thirdweb-dev/react';
+import { useState , useEffect } from 'react';
+import { ThirdwebSDK } from '@thirdweb-dev/sdk';
+import { MicroGrantsStrategy } from "@allo-team/allo-v2-sdk";
 
 type Props = {
     application: TNewApplicationResponse;
@@ -15,6 +18,51 @@ type Props = {
 }
 
 const Recipient = ({ application, pool }: Props) => {
+
+    const [strategy, setStrategy] = useState<MicroGrantsStrategy | null>(null);
+    const [sdk,setSdk] = useState<ThirdwebSDK | null>(null);
+    const [accounts, setAccounts] = useState<string[]>([]);
+    // console.log("Pool", pool)
+
+
+    const microstrategy = () => {
+        const strategy = new MicroGrantsStrategy({
+            chain: pool.chainId,
+            poolId: pool.poolId, // valid pool Id
+            rpc: getNetworks()[Number(pool.chainId)].rpc,
+        });
+        strategy?.setContract(pool.strategy);
+        setStrategy(strategy);
+    };
+
+
+        const allocation = { recipientId: application.recipientId, status: 2}
+        const singleAllocationdata = strategy?.getAllocationData( application.recipientId, 2);
+        const sendTransaction = async () => {
+        // @ts-ignore
+            const tx = await sdk?.wallet.sendRawTransaction(singleAllocationdata);
+            console.log(tx,"tx")
+            return tx;
+          }
+
+        useEffect(() => {
+            if(window?.ethereum){
+                const getAccount = async () => {
+                    const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
+                    setAccounts(accounts);
+                }
+                getAccount();
+                const provider = new ethers.providers.Web3Provider(window.ethereum);
+                const signer = provider.getSigner(accounts[0]);
+                const sdk = ThirdwebSDK.fromSigner(signer);
+                setSdk(sdk);
+            }
+
+            if(pool.microGrantRecipients){
+                microstrategy();
+            }
+
+          }, [pool.chainId]);
 
     const alertnotallocate =() => {
         alert("You are not an allocate of this pool ❌")
@@ -108,7 +156,7 @@ const Recipient = ({ application, pool }: Props) => {
 
                 </div>
 
-                <button className="w-full hover:bg-green-400 p-4 text-orange-600" onClick={() => alertnotallocate()}>Allocate</button>
+                <button className="w-full hover:bg-green-400 p-4 text-orange-600" onClick={() => sendTransaction()}>Allocate</button>
             </div>
         </div>
     );

@@ -30,7 +30,6 @@ import { useState } from 'react';
 import Banner from '../Banner';
 import {  utils , Signer} from "ethers";
 import {  ThirdwebSDK } from "@thirdweb-dev/sdk";
-import { useSigner, Web3Button } from "@thirdweb-dev/react";
 
 const HomePage = ({
     pool,
@@ -50,56 +49,11 @@ const HomePage = ({
         };
     }
 
-    const [strategy, setStrategy] = useState<MicroGrantsStrategy | null>(null);
-    const [sdk,setSdk] = useState<ThirdwebSDK | null>(null);
-    // console.log("Pool", pool)
-    console.log(pool.microGrantRecipients)
     const status: EPoolStatus = getPoolStatus(
         pool?.allocationStartTime,
         pool?.allocationEndTime,
     );
 
-    const microstrategy = () => {
-        const strategy = new MicroGrantsStrategy({
-            chain: pool.chainId,
-            poolId: pool.poolId, // valid pool Id
-            rpc: getNetworks()[Number(pool.chainId)].rpc,
-        });
-        strategy?.setContract(pool.strategy);
-        setStrategy(strategy);
-    };
-
-    const allocations = [
-        { recipientId: "9a33fD05dCF5A4096adA6110ad679674408c1d7D", status: 1 },
-        { recipientId: "0439427C42a099E7E362D86e2Bbe1eA27300f6Cb", status: 1 },
-        ];
-        // @ts-ignore
-        const txData = strategy?.getBatchAllocationData(allocations);
-        // console.log(txData,"txData")
-
-        const sendTransaction = async (txData: any) => {
-            const tx = await sdk?.wallet.sendRawTransaction(txData);
-            console.log(tx,"tx")
-            return tx;
-          }
-
-        // Client could be from ethers, viem, etc.
-        // const tx = await sendTransaction({
-        // to: txData.to as string,
-        // data: txData.data,
-        // value: BigInt(txData.value),
-        // });
-
-        useEffect(() => {
-            if(window?.ethereum){
-                const provider = new ethers.providers.Web3Provider(window.ethereum);
-                const signer = provider.getSigner();
-                console.log(signer,"signer",provider);
-                // @ts-ignore
-                const sdk = ThirdwebSDK.fromSigner({signer: signer, network: pool.chainId});
-                setSdk(sdk);
-            }
-          }, [pool.chainId]);
 
     return (
         <div className="flex-1 pt-16 overflow-x-hidden overflow-y-auto ">
@@ -107,7 +61,6 @@ const HomePage = ({
             {pool && (
                 <div className="flex-1 space-y-4 p-4 md:p-8 pt-6">
             
-                    {/* <button onClick={sendTransaction}>Call microgrants</button> */}
 
                     <div className="flex items-center justify-between space-y-2">
                         <h2 className="text-3xl font-bold tracking-tight">
@@ -118,7 +71,6 @@ const HomePage = ({
                             {" "}Pool 👋
                         </h2>
 
-                        {/* <button onClick={microstrategy}>Call microgrants</button> */}
                         <div className="hidden md:flex items-center space-x-2">
                             <CalendarDateRangePicker allocationStartTime={pool?.allocationStartTime} allocationEndTime={pool?.allocationEndTime} />
                         </div>
@@ -263,7 +215,7 @@ const HomePage = ({
                     </Tabs>
 
                     <div className='text-2xl pt-8 font-bold tracking-tight'>Applications </div>
-
+                    <button className='text-sm text-gray-500 hover:underline'>Apply </button>                                
                     {applications.length == 0 && <div>No receipients by the Pool</div>}
 
                     <div className='flex gap-4 overflow-scroll pb-8 pt-4'>

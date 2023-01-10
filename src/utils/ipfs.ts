@@ -53,9 +53,7 @@ export default class IPFSClient {
 
     async fetchJson(cid: string) {
         const url = this.fileUrl(cid);
-        console.log("URL", url);
         const resp = await fetch(url);
-        console.log("resp", resp);
         return await resp.json();
     }
 

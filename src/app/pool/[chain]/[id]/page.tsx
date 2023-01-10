@@ -59,20 +59,15 @@ export default async function PoolDetail({
         const metadata = await getIPFSClient().fetchJson(
           application.metadataPointer,
         );
-        console.log("Metadata", metadata);
         application.metadata = metadata;
         if (metadata.base64Image) {
           const image = await getIPFSClient().fetchJson(metadata.base64Image);
-          console.log("image", image, image.data);
           application.applicationBanner = image.data;
         }
-
-        console.log("Application", application)
 
         const response = await fetch(
           `https://gitcoin.mypinata.cloud/ipfs/${application.metadataPointer}`,
         );
-        console.log("Response", response);
 
         if (response.ok) {
           let metadata = await response.json();
