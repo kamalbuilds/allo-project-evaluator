@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { Address, truncatedString } from "../Address";
 import Table from "../Table";
-import { TTableData } from "../types/types";
+import { TTableData } from "../../types/types";
 import { convertChainIdToNetworkName } from "@/utils/utils";
 import { TProfileDetail } from "./types";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
