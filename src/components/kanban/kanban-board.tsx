@@ -20,8 +20,8 @@ import {
 import { SortableContext, arrayMove } from "@dnd-kit/sortable";
 import { TaskCard } from "./task-card";
 import type { Column } from "./board-column";
-import { hasDraggableData } from "@/lib/utils";
-import { Task, useTaskStore } from "@/lib/store";
+import { hasDraggableData } from "../../../lib/utils";
+import { Task, useTaskStore } from "../../../lib/store";
 import NewTaskDialog from "./new-task-dialog";
 import NewSectionDialog from "./new-section-dialog";
 // import { coordinateGetter } from "./multipleContainersKeyboardPreset";

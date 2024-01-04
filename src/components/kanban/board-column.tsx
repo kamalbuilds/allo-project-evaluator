@@ -7,7 +7,7 @@ import { cva } from "class-variance-authority";
 import { Card, CardContent, CardHeader } from "../ui/card";
 import { Button } from "../ui/button";
 import { GripVertical } from "lucide-react";
-import { Task } from "@/lib/store";
+import { Task } from "../../../lib/store";
 import { ColumnActions } from "./column-action";
 import { Input } from "../ui/input";
 

@@ -4,8 +4,8 @@ import { EmployeeTable } from "@/components/tables/employee-tables/employee-tabl
 import { buttonVariants } from "@/components/ui/button";
 import { Heading } from "@/components/ui/heading";
 import { Separator } from "@/components/ui/separator";
-import { Employee } from "@/constants/data";
-import { cn } from "@/lib/utils";
+import { Employee } from "../../../../constants/data";
+import { cn } from "../../../../lib/utils";
 import { Plus } from "lucide-react";
 import Link from "next/link";
 
