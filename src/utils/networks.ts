@@ -1,4 +1,4 @@
-import { ICoreContracts, INetwork, TNetworkData, Slug, IStrategyContracts } from "@/types/types";
+import { ICoreContracts, INetwork, TNetworkData, Slug, IStrategyContracts } from "../types/types";
 
 const coreContracts: ICoreContracts = {
   registryImplementation: {

@@ -1,7 +1,7 @@
 "use client";
 
 import { getNetworks, getNetworksBySlug } from "@/utils/networks";
-import { INetwork, Slug, TNetworkData } from "@/types/types";
+import { INetwork, Slug, TNetworkData } from "../types/types";
     import { Fragment, useContext } from 'react'
 import { Menu, Transition } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'

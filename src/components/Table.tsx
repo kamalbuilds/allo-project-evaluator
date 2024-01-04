@@ -1,7 +1,7 @@
 "use client";
 
 import { useMediaQuery } from "@/hooks/useMediaQuery";
-import { TTableData } from "@/types/types";
+import { TTableData } from "../types/types";
 import { ArrowLeftIcon, ArrowRightIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
 import TableMobile from "./TableMobile";

@@ -1,4 +1,4 @@
-import { TTableData } from "@/types/types";
+import { TTableData } from "../types/types";
 
 const TableMobile = ({
   data,

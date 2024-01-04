@@ -1,7 +1,7 @@
 "use client";
 
 import Table from "../Table";
-import { TTableData } from "@/types/types";
+import { TTableData } from "../../types/types";
 import { Address } from "../Address";
 import {
   convertChainIdToNetworkName,

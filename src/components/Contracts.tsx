@@ -5,7 +5,7 @@ import { getNetworksBySlug } from "@/utils/networks";
 import { useContext } from "react";
 import { AddressResponsive } from "./Address";
 import Table from "./Table";
-import { TTableData } from "@/types/types";
+import { TTableData } from "../types/types";
 import SelectNetwork from "./SelectNetwork";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 

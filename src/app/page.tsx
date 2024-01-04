@@ -3,7 +3,7 @@ import Transactions from "@/components/Transactions";
 import {
   IAlloTransactionLogResponse,
   TAlloTransactionLog,
-} from "@/types/types";
+} from "../types/types";
 import { graphqlEndpoint, getAlloTransactions } from "@/utils/query";
 import { request } from "graphql-request";
 import { Suspense } from "react";

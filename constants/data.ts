@@ -1,5 +1,5 @@
 import { Icons } from "@/components/icons";
-import { NavItem, SidebarNavItem } from "@/types";
+import { NavItem, SidebarNavItem } from "../types";
 
 export type User = {
   id: number;

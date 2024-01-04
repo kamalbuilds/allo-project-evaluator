@@ -2,7 +2,7 @@
 
 import { Address, Hash, truncatedString } from "./Address";
 import Table from "./Table";
-import { TAlloTransactionLog, TTableData } from "@/types/types";
+import { TAlloTransactionLog, TTableData } from "../types/types";
 import { convertChainIdToNetworkName } from "@/utils/utils";
 import Status from "./Status";
 import { useMediaQuery } from "@/hooks/useMediaQuery";

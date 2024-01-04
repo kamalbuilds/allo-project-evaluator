@@ -1,5 +1,5 @@
 "use client";
-import { Slug } from "@/types/types";
+import { Slug } from "../types/types";
 import React, { useState } from "react";
 
 interface INetworkContextProps {

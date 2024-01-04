@@ -3,7 +3,7 @@
 import { convertChainIdToNetworkName } from "@/utils/utils";
 import { AddressResponsive, truncatedString } from "../Address";
 import { TPoolDetail } from "./types";
-import { MetadataProtocol } from "@/types/types";
+import { MetadataProtocol } from "../../types/types";
 import { TbExternalLink } from "react-icons/tb";
 import JsonView from "@uiw/react-json-view";
 import { ethers } from "ethers";
