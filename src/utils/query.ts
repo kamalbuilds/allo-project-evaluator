@@ -237,3 +237,61 @@ export const getAlloTransactionsInvolved = gql`
   }
 `;
 
+export const getMicroGrants = gql`
+  query GetMicrogrants($chainId: String!, poolId: String) {
+    microGrant(chainId: "421614", poolId: "19") {
+      poolId
+      chainId
+      strategy
+      allocationStartTime
+      allocationEndTime
+      approvalThreshold
+      maxRequestedAmount
+      blockTimestamp
+      useRegistryAnchor
+      pool {
+        strategy
+        strategyName
+        tokenMetadata
+        token
+        amount
+        metadataPointer
+        profile {
+          profileId
+          name
+        }
+      }
+      allocateds {
+        recipientId
+        sender
+        contractAddress
+        contractName
+        chainId
+        status
+        blockTimestamp
+        transactionHash
+      }
+      distributeds {
+        recipientId
+        recipientAddress
+        amount
+        sender
+        contractName
+        contractAddress
+        transactionHash
+        blockNumber
+        blockTimestamp
+        chainId
+      }
+      microGrantRecipients {
+        recipientId
+        recipientAddress
+        requestedAmount
+        metadataPointer
+        blockTimestamp
+        isUsingRegistryAnchor
+        status
+      }
+  }
+  }
+`;

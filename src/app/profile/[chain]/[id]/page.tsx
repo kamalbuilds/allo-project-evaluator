@@ -20,6 +20,9 @@ export default async function ProfileDetailPage({
     }
   );
 
+
+
+  const 
   const profile: TProfileDetail = profileDetails.profile;
 
   const response = await fetch(
