@@ -44,8 +44,17 @@ export default async function ProfileDetailPage({
   if (response.ok) metadata = await response.text();
 
   return (
-    <div>
+    <>
       <ProfileDetail profile={profile} metadata={metadata} />
-    </div>
+      {/* <div className="flex flex-col items-center justify-center">
+        <div className="flex flex-col items-center justify-center">
+          <h1 className="text-2xl font-bold">Grants</h1>
+          <div className="flex flex-col items-center justify-center">
+            {grantsDetails?.microGrant.poolId}
+            {grantsDetails?.microGrant.chainId}
+          </div>
+        </div>
+    </div> */}
+    </>
   );
 }

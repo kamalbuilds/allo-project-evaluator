@@ -44,7 +44,7 @@ const Table = ({
   const endRow = startRow + rowsPerPage;
   const currentRows = data.rows.slice(startRow, endRow);
 
-  console.log("isMobile", isMobile);
+
 
   return (
     <>

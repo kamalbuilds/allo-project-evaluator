@@ -31,8 +31,10 @@ const Pool = ({
       "Profile Owner",
       "Updated At",
       "Network",
+      "Strategy"
     ],
     rows: Object.values(data).map((pool: TPoolDetail) => {
+
       return [
         // eslint-disable-next-line react/jsx-key
         <Link
@@ -52,6 +54,7 @@ const Pool = ({
         <Address address={pool.profile?.owner ?? ""} chainId={Number(pool.chainId)} />,
         (new Date(pool.updatedAt)).toLocaleString(),
         convertChainIdToNetworkName(Number(pool.chainId)),
+        <div key={pool.poolId}>{pool.strategy}</div>
       ];
     }),
   };

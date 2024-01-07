@@ -13,6 +13,7 @@ export const getPoolDataQuery = gql`
       chainId
       updatedAt
       strategy
+      strategyName
       token
       amount
       profile {
@@ -35,6 +36,7 @@ export const getPoolDetailDataQuery = gql`
       token
       amount
       strategy
+      strategyName
       metadataProtocol
       metadataPointer
       tokenMetadata

@@ -7,6 +7,7 @@ export type TPool = {
   metadataPointer: string;
   metadataProtocol: number;
   strategy: string;
+  strategyName: string;
   token: string;
 };
 
