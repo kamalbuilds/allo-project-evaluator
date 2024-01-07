@@ -34,5 +34,7 @@ export default async function PoolDetail({
     console.error(error);
   }
 
+  console.log("Pool", pool, poolMetadata)
+
   return <PoolDetailPage pool={pool} poolMetadata={poolMetadata} />;
 }
