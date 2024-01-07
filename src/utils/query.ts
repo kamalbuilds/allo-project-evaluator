@@ -239,7 +239,7 @@ export const getAlloTransactionsInvolved = gql`
 
 export const getMicroGrants = gql`
   query GetMicrogrants($chainId: String!, $poolId: String!) {
-    microGrant(chainId: $chainId, poolId: $poolId){ 
+      microGrant(chainId: $chainId, poolId: $poolId){ 
       poolId
       chainId
       strategy
@@ -291,7 +291,6 @@ export const getMicroGrants = gql`
         blockTimestamp
         isUsingRegistryAnchor
         status
-      }
-  }
-  }
-`;
+}
+}
+  }`;
