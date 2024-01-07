@@ -126,7 +126,7 @@ const PoolDetailPage = ({
               Created at
             </dt>
             <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-              {new Date(pool.createdAt).toLocaleString()}
+              {new Date(pool.createdAt).toISOString()}
             </dd>
           </div>
           <div className={`px-4 ${py} sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0`}>
@@ -134,7 +134,7 @@ const PoolDetailPage = ({
               Updated at
             </dt>
             <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-              {new Date(pool.updatedAt).toLocaleString()}
+              {new Date(pool.updatedAt).toISOString()}
             </dd>
           </div>
           <div className={`px-4 ${py} sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0`}>

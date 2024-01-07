@@ -27,7 +27,6 @@ const ProfileDetail = ({
   }
   const isMobile = useMediaQuery(768);
   const py = isMobile ? "py-2" : "py-6";
-
   return (
     <div className="pb-10">
       <div className="flex flex-row items-center justify-between px-4 sm:px-0 my-10">
@@ -129,7 +128,7 @@ const ProfileDetail = ({
               Created at
             </dt>
             <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-              {new Date(profile.createdAt).toLocaleString()}
+              {new Date(profile.createdAt).toISOString()}
             </dd>
           </div>
           <div className={`px-4 ${py} sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0`}>
@@ -137,7 +136,7 @@ const ProfileDetail = ({
               Updated at
             </dt>
             <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-              {new Date(profile.updatedAt).toLocaleString()}
+              {new Date(profile.updatedAt).toISOString()}
             </dd>
           </div>
           <div className={`px-4 ${py} sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0`}>
