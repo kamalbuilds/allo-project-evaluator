@@ -238,8 +238,8 @@ export const getAlloTransactionsInvolved = gql`
 `;
 
 export const getMicroGrants = gql`
-  query GetMicrogrants($chainId: String!, poolId: String) {
-    microGrant(chainId: "421614", poolId: "19") {
+  query GetMicrogrants($chainId: String!, $poolId: String!) {
+    microGrant(chainId: $chainId, poolId: $poolId){ 
       poolId
       chainId
       strategy
