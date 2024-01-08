@@ -32,10 +32,10 @@ const ProfileDetail = ({
       <div className="flex flex-row items-center justify-between px-4 sm:px-0 my-10">
         <div className="flex flex-col">
           <h3 className="text-base font-semibold leading-7 text-gray-900">
-            {profile.name}
+            {profile?.name}
           </h3>
           <p className="mt-1 max-w-2xl text-sm leading-6 text-gray-500 font-mono">
-            {isMobile ? truncatedString(profile.profileId) : profile.profileId}
+            {isMobile ? truncatedString(profile?.profileId) : profile?.profileId}
           </p>
         </div>
         <div>

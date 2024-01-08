@@ -11,6 +11,34 @@ export enum OrderBy {
   BLOCK_TIMESTAMP_DESC,
 }
 
+export enum EPoolStatus {
+  UPCOMING = "Upcoming",
+  ACTIVE = "Active",
+  ENDED = "Ended",
+}
+
+type ApplicationStatus = "Accepted" | "Rejected" | "Pending" | "Paid";
+
+export type TApplicationMetadata = {
+  name: string;
+  website: string;
+  description: string;
+  email: string;
+  base64Image: string;
+};
+
+export type TNewApplicationResponse = {
+  blockTimestamp: string;
+  isUsingRegistryAnchor: boolean;
+  metadataPointer: string;
+  recipientAddress: `0x${string}`;
+  recipientId: `0x${string}`;
+  requestedAmount: string;
+  status: ApplicationStatus;
+  metadata?: TApplicationMetadata;
+  applicationBanner?: string;
+};
+
 export interface IContract {
   name: string;
   address: string;
