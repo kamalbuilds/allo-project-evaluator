@@ -18,7 +18,7 @@ const PoolDashboard = ({
 
 
     return (
-        <div className="flex h-screen overflow-hidden">
+        <div className="flex">
             {/* <Sidebar className="w-1/6 hidden md:block" /> */}
             <HomePage pool={pool} poolMetadata={poolMetadata} applications={applications} />
         </div>

@@ -2,7 +2,7 @@
 import React from 'react';
 import { CalendarDateRangePicker } from "@/components/date-range-picker";
 import { Overview } from "@/components/overview";
-import { RecentSales } from "@/components/recent-sales";
+import { AllocatesList } from "@/components/AllocatesList";
 import { Button } from "@/components/ui/button";
 import {
     Card,
@@ -22,6 +22,11 @@ import Link from 'next/link';
 import { EPoolStatus } from '@/types/types';
 import { cn } from '../../../lib/utils';
 import Recipient from '../Recipient';
+import DistrbutedList from '../DistributedList';
+import DistrbuitedList from '../DistributedList';
+import Allocatee from '../Allocatee';
+import { IoIosWarning } from "react-icons/io";
+
 
 const HomePage = ({
     pool,
@@ -41,24 +46,27 @@ const HomePage = ({
         };
     }
 
-    console.log("metadataObj", metadataObj)
-    console.log("POOL fetched", pool);
-    console.log("Applications >>>>>>>", applications);
+    console.log("pool", pool, applications);
 
     const status: EPoolStatus = getPoolStatus(
         pool.allocationStartTime,
         pool.allocationEndTime,
     );
-    console.log("Status", status)
 
-    const allocateds = pool.allocateds;
-    const distributeds = pool.distributeds;
-
+    console.log("Status", status);
 
     return (
         <div className="flex-1 pt-16 overflow-x-hidden overflow-y-auto ">
+
             {pool && (
                 <div className="flex-1 space-y-4 p-4 md:p-8 pt-6">
+
+                    {status === 'Ended' && <div className='text-md flex flex-row items-center gap-2 font-normal text-red-500'>
+                        <IoIosWarning color={"rgb(216 15 15)"} />
+                        <div> This Pool is Ended and Rewards have been distributed</div>
+                    </div>}
+
+
                     <div className="flex items-center justify-between space-y-2">
                         <h2 className="text-3xl font-bold tracking-tight">
                             Hi, Welcome to {" "}
@@ -71,6 +79,7 @@ const HomePage = ({
                             <CalendarDateRangePicker allocationStartTime={pool.allocationStartTime} allocationEndTime={pool.allocationEndTime} />
                         </div>
                     </div>
+
                     <div>
                         <p>{metadataObj?.description}</p>
                     </div>
@@ -110,11 +119,9 @@ const HomePage = ({
                                             {pool.pool.tokenMetadata.symbol ??
                                                 getNetworks()[Number(pool.chainId)].symbol}
                                         </div>
-                                        <p className="text-xs text-muted-foreground">
-                                            +20.1% from last month
-                                        </p>
                                     </CardContent>
                                 </Card>
+
                                 <Card>
                                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                                         <CardTitle className="text-sm font-medium">
@@ -147,32 +154,37 @@ const HomePage = ({
                                         </p>
                                     </CardContent>
                                 </Card>
-                                <Card>
-                                    <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                                        <CardTitle className="text-sm font-medium">Profile</CardTitle>
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            viewBox="0 0 24 24"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                            strokeWidth="2"
-                                            className="h-4 w-4 text-muted-foreground"
-                                        >
-                                            <rect width="20" height="14" x="2" y="5" rx="2" />
-                                            <path d="M2 10h20" />
-                                        </svg>
-                                    </CardHeader>
-                                    <CardContent>
-                                        <div className="text-2xl font-bold">
-                                            {pool.pool.profile.name}
-                                        </div>
-                                        <p className="text-xs text-muted-foreground">
-                                            <ShortProfileId profileId={pool.pool.profile.profileId} />
-                                        </p>
-                                    </CardContent>
-                                </Card>
+
+                                <Link href={`/profile/${pool.pool?.chainId}/${pool.pool.profile?.profileId}`}>
+                                    <Card className='hover:shadow-xl'>
+                                        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                                            <CardTitle className="text-sm font-medium">Profile</CardTitle>
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                strokeWidth="2"
+                                                className="h-4 w-4 text-muted-foreground"
+                                            >
+                                                <rect width="20" height="14" x="2" y="5" rx="2" />
+                                                <path d="M2 10h20" />
+                                            </svg>
+                                        </CardHeader>
+                                        <CardContent>
+                                            <div className="text-2xl font-bold">
+                                                {pool.pool.profile.name}
+                                            </div>
+                                            <p className="text-xs text-muted-foreground">
+                                                <ShortProfileId profileId={pool.pool.profile?.profileId} />
+                                            </p>
+                                        </CardContent>
+                                    </Card>
+                                </Link>
+
+
                                 <Card>
                                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                                         <CardTitle className="text-sm font-medium">
@@ -201,51 +213,66 @@ const HomePage = ({
                     </Tabs>
 
                     <div className='text-2xl pt-8 font-bold tracking-tight'>Applications </div>
-                    <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-7">
-                        {applications.map((application: any) => {
+
+                    {applications.length == 0 && <div>No receipients by the Pool</div>}
+
+                    <div className='flex gap-4 overflow-scroll pb-8 pt-4'>
+                        {applications?.map((application) => {
                             console.log("Application", application)
                             return (
-                                <Card className="col-span-4 md:col-span-3" key={application.blockTimestamp}>
-                                    <CardHeader>
-                                        <CardTitle>
-                                            {application.metadata.name}
-                                        </CardTitle>
-                                        <CardDescription className=' min-h-[75px]'>
-                                            {application.metadata.description}
-                                        </CardDescription>
-                                    </CardHeader>
-                                    <CardContent>
-                                        <Recipient application={application} pool={pool} />
-                                    </CardContent>
-                                </Card>
+                                <>
+                                    {application.metadata && (
+                                        <div className='flex flex-1 min-w-[350px]  py-4 rounded-lg flex-col border border-whitesmoke' key={application.blockTimestamp}>
+                                            <div className='ml-4 h-[100px] flex flex-col gap-2'>
+                                                <div className='text-[24px]'> {application.metadata.name}</div>
+                                                <div>{application.metadata.description.slice(0, 100)}...</div>
+                                            </div>
+                                            <Recipient application={application} pool={pool} />
+                                        </div>
+                                    )}
+                                </>
                             )
                         })}
                     </div>
 
-                    <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-7">
-                        <Card className="col-span-4 md:col-span-3">
-                            <CardHeader>
-                                <CardTitle>Allocatees</CardTitle>
-                                <CardDescription>
-                                    You have {pool.allocateds.length} allocatees
-                                </CardDescription>
-                            </CardHeader>
-                            <CardContent>
-                                <RecentSales allocated={pool.allocateds} />
-                            </CardContent>
-                        </Card>
-                        <Card className="col-span-4 md:col-span-3">
-                            <CardHeader>
-                                <CardTitle>Distributees</CardTitle>
-                                <CardDescription>
-                                    You have {pool.distributeds.length} distributees
-                                </CardDescription>
-                            </CardHeader>
-                            <CardContent>
-                                {/* <RecentSales /> */}
-                            </CardContent>
-                        </Card>
+
+                    <div className='flex gap-4 overflow-scroll pb-8 pt-4'>
+
+                        <div className='flex flex-1 min-w-[350px]  py-4 rounded-lg flex-col border border-whitesmoke' >
+                            <div className='ml-4 h-[100px] flex flex-col gap-2'>
+                                <div className='text-2xl font-bold'>Allocatees </div>
+                                <div>{pool.allocateds.length} allocatees have casted vote</div>
+                            </div>
+                            <div className='flex flex-col gap-4'>
+                                {pool?.allocateds.map((allocatee) => {
+                                    return (
+                                        <Allocatee key={allocatee?.transactionHash} allocatee={allocatee} applications={applications} />
+                                    )
+                                })}
+                            </div>
+                        </div>
+
+                        <div className='flex flex-1 min-w-[350px]  py-4 rounded-lg flex-col border border-whitesmoke' >
+                            <div className='ml-4 h-[100px] flex flex-col gap-2'>
+                                <div className='text-2xl font-bold'>Grants Distributed </div>
+                                <div> You have {pool.distributeds.length} receipients who got grants</div>
+                            </div>
+                            <div className='flex flex-col gap-8'>
+                                {pool?.distributeds.map((distributee, index) => {
+                                    return (
+                                        <div key={index} className='border-y-2 px-4 flex flex-col gap-4'>
+                                            <DistrbuitedList distributee={distributee} applications={applications} pool={pool} />
+                                        </div>
+                                    )
+                                })}
+                            </div>
+                        </div>
+
+
+
                     </div>
+
+
                 </div>
             )}
         </div>

@@ -1,7 +1,7 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Address } from "./Address";
 
-export function RecentSales({
+export function AllocatesList({
   allocated
 }: any) {
 

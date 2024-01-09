@@ -82,7 +82,6 @@ export default async function PoolDetail({
   return (
     <>
       <PoolDashboard pool={Pool} poolMetadata={poolMetadata} applications={applications} />
-      <PoolDetailPage pool={pool} poolMetadata={poolMetadata} />
     </>
   );
 }

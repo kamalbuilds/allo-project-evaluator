@@ -55,7 +55,7 @@ export const Address = (props: { address: string; chainId: number }) => {
   return (
     <div className="flex items-center">
       <div className="text-sm font-medium text-gray-900 font-mono">
-        {convertAddressToShortString(props.address)}
+        {convertAddressToShortString(props?.address)}
       </div>
       <div
         onClick={() => copy(props.address)}

@@ -53,8 +53,8 @@ const Recipient = ({ application, pool }: Props) => {
     return (
         <div className="space-y-8">
 
-            <div className="flex items-center">
-                <div className="ml-4 space-y-1">
+            <div className="flex items-center mx-4">
+                <div className=" space-y-1">
                     <p className="text-sm font-medium leading-none">Status</p>
                 </div>
                 {application.status === 'Pending' && <div className="hover:underline px-2 py-1 text-yellow-600 bg-yellow-50 ml-auto font-medium">{application.status}</div>}
@@ -63,55 +63,59 @@ const Recipient = ({ application, pool }: Props) => {
             </div>
 
 
-            <div className="flex items-center">
-                <div className="ml-4 space-y-1">
-                    <p className="text-sm font-medium leading-none">Application ID</p>
+            <div className='mx-4 flex gap-4 flex-col'>
+                <div className="flex items-center">
+                    <div className="ml-4 space-y-1">
+                        <p className="text-sm font-medium leading-none">Application ID</p>
+                    </div>
+                    <div className="ml-auto font-medium">
+                        <Address
+                            address={application.recipientId}
+                            chainId={Number(pool.chainId)}
+                        />
+                    </div>
                 </div>
-                <div className="ml-auto font-medium">
-                    <Address
-                        address={application.recipientId}
-                        chainId={Number(pool.chainId)}
-                    />
+                <div className="flex items-center">
+                    <div className="ml-4 space-y-1">
+                        <p className="text-sm font-medium leading-none">Recipient Address</p>
+                    </div>
+                    <div className="ml-auto font-medium">
+                        {application?.recipientAddress && <Address
+                            address={application.recipientAddress}
+                            chainId={Number(pool.chainId)}
+                        />}
+                    </div>
                 </div>
-            </div>
-            <div className="flex items-center">
-                <div className="ml-4 space-y-1">
-                    <p className="text-sm font-medium leading-none">Recipient Address</p>
+                <div className="flex items-center">
+                    <div className="ml-4 space-y-1">
+                        <p className="text-sm font-medium leading-none">Amount</p>
+                    </div>
+                    <div className="ml-auto font-medium">
+                        {ethers.formatUnits(
+                            application.requestedAmount ?? 0,
+                            pool.pool.tokenMetadata.decimals ?? 18,
+                        )}{" "}
+                        {pool.pool.tokenMetadata.symbol ??
+                            getNetworks()[Number(pool.chainId)].symbol}
+                    </div>
                 </div>
-                <div className="ml-auto font-medium">
-                    <Address
-                        address={application.recipientAddress}
-                        chainId={Number(pool.chainId)}
-                    />
+                <div className="flex items-center">
+                    <div className="ml-4 space-y-1">
+                        <p className="text-sm font-medium leading-none">Approvals</p>
+                    </div>
+                    <div className="ml-auto font-medium">
+                        {approvals.length}/{pool.approvalThreshold}
+                    </div>
+
                 </div>
-            </div>
-            <div className="flex items-center">
-                <div className="ml-4 space-y-1">
-                    <p className="text-sm font-medium leading-none">Amount</p>
-                </div>
-                <div className="ml-auto font-medium">
-                    {ethers.formatUnits(
-                        application.requestedAmount ?? 0,
-                        pool.pool.tokenMetadata.decimals ?? 18,
-                    )}{" "}
-                    {pool.pool.tokenMetadata.symbol ??
-                        getNetworks()[Number(pool.chainId)].symbol}
-                </div>
-            </div>
-            <div className="flex items-center">
-                <div className="ml-4 space-y-1">
-                    <p className="text-sm font-medium leading-none">Approvals</p>
-                </div>
-                <div className="ml-auto font-medium">
-                    {approvals.length}/{pool.approvalThreshold}
-                </div>
-            </div>
-            <div className="flex items-center">
-                <div className="ml-4 space-y-1">
-                    <p className="text-sm font-medium leading-none">Rejections</p>
-                </div>
-                <div className="ml-auto font-medium">
-                    {rejections.length}
+                <div className="flex items-center">
+                    <div className="ml-4 space-y-1">
+                        <p className="text-sm font-medium leading-none">Rejections</p>
+                    </div>
+                    <div className="ml-auto font-medium">
+                        {rejections.length}
+                    </div>
+
                 </div>
             </div>
         </div>
