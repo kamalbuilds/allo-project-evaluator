@@ -1,5 +1,5 @@
 "use client";
-
+import { useState } from "react";
 import Table from "../Table";
 import { TTableData } from "../../types/types";
 import { Address } from "../Address";
@@ -13,6 +13,10 @@ import { TPoolDetail } from "./types";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { getStrategyTypeFromStrategyName } from "@/utils/helpers";
 
+import { Fragment } from 'react'
+import { Menu, Transition } from '@headlessui/react'
+import { ChevronDownIcon } from '@heroicons/react/20/solid'
+
 const Pool = ({
   data,
   header,
@@ -23,27 +27,22 @@ const Pool = ({
   description?: string;
 }) => {
 
-  const filterPool = (strategy: string) => {
-    const filteredArray = data.filter(item => getStrategyTypeFromStrategyName(item.strategyName) === strategy);
-    console.log("Filtered Array", filteredArray);
-  }
-
-
+  const [filteredPool, setFilteredPool] = useState(data);
 
   const tableData: TTableData = {
     headers: [
       "ID",
-      "Address",
+      "Strategy Name",
+      "Strategy",
       "Token",
       "Amount",
       "Profile Name",
       "Profile Owner",
       "Updated At",
       "Network",
-      "Strategy",
-      "Strategy Name"
+
     ],
-    rows: Object.values(data).map((pool: TPoolDetail) => {
+    rows: Object.values(filteredPool).map((pool: TPoolDetail) => {
 
       console.log("Pool", pool);
 
@@ -55,6 +54,7 @@ const Pool = ({
         >
           {pool.poolId}
         </Link>,
+        <div key={pool.poolId}>{getStrategyTypeFromStrategyName(pool.strategyName)}</div>,
         // {getStrategyTypeFromStrategyName(pool.pool.strategyName)}
 
         ,
@@ -68,27 +68,38 @@ const Pool = ({
         <Address address={pool.profile?.owner ?? ""} chainId={Number(pool.chainId)} />,
         (new Date(pool.updatedAt)).toLocaleString(),
         convertChainIdToNetworkName(Number(pool.chainId)),
-        <div key={pool.poolId}>{pool.strategy}</div>,
-        <div key={pool.poolId}>{getStrategyTypeFromStrategyName(pool.strategyName)}</div>
+
+
       ];
     }),
   };
 
   const isMobile = useMediaQuery(768);
+  const [activeState, setActiveState] = useState('Select');
+
+  const filterPool = (strategy: string) => {
+    setActiveState(strategy)
+    const filteredArray = data.filter(item => getStrategyTypeFromStrategyName(item.strategyName) == strategy
+    );
+    setFilteredPool(filteredArray);
+  }
+
+  const clearSelect = () => {
+    setActiveState('Select');
+    setFilteredPool(data);
+  }
 
   return (
     <>
-      <div onClick={() => filterPool("Manual")}>Manual</div>
-      <div onClick={() => filterPool("Governance")}>Governance</div>
-      <div>Hats</div>
-
-
       <Table
         data={tableData}
         header={header}
         description={description}
         showPagination={true}
         rowsPerPage={isMobile ? 5 : 10}
+        activeState={activeState}
+        filterPool={filterPool}
+        clearSelect={clearSelect}
       />
     </>
   );

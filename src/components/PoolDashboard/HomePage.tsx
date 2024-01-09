@@ -47,6 +47,8 @@ const HomePage = ({
         };
     }
 
+    console.log("Pool", pool)
+
     const status: EPoolStatus = getPoolStatus(
         pool.allocationStartTime,
         pool.allocationEndTime,
@@ -152,7 +154,7 @@ const HomePage = ({
                                     </CardContent>
                                 </Card>
 
-                                <Link href={`/profile/${pool.pool?.chainId}/${pool.pool.profile?.profileId}`}>
+                                <Link href={`/profile/${pool?.chainId}/${pool.pool.profile?.profileId}`}>
                                     <Card className='hover:shadow-xl'>
                                         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                                             <CardTitle className="text-sm font-medium">Profile</CardTitle>

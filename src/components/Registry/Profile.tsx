@@ -36,12 +36,9 @@ const Profile = ({ data }: { data: TProfileDetail[] }) => {
     <Table
       data={tableData}
       header={"Profiles"}
-      description={
-        "A list of all the profiles in the registry on all supported networks"
-      }
+      description={"A list of all the profiles in the registry on all supported networks"}
       showPagination={true}
-      rowsPerPage={isMobile ? 5 : 10}
-    />
+      rowsPerPage={isMobile ? 5 : 10} activeState={undefined} filterPool={undefined} clearSelect={undefined} />
   );
 };
 

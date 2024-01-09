@@ -3,7 +3,7 @@ import { EPoolStatus } from "@/types/types";
 export const getStrategyTypeFromStrategyName = (
     strategyName: string,
 ): string => {
-    if (strategyName === "allov2.MicroGrantsStrategy") return "Manual";
+    if (strategyName === "allov2.MicroGrantsStrategy") return "MicroGrants";
     if (strategyName === "allov2.MicroGrantsGovStrategy") return "Governance";
     if (strategyName === "allov2.MicroGrantsHatsStrategy") return "Hats";
 

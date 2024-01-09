@@ -62,8 +62,7 @@ export const Transactions = ({
       header={"Allo Transaction Log"}
       showPagination={true}
       description={""}
-      rowsPerPage={isMobile ? 5 : 20}
-    />
+      rowsPerPage={isMobile ? 5 : 20} activeState={undefined} filterPool={undefined} clearSelect={undefined} />
   );
 };
 
