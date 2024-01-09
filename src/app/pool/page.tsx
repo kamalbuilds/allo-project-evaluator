@@ -12,10 +12,6 @@ export default async function PoolHome() {
   const data: IPoolsResponse = await request(graphqlEndpoint, getPoolDataQuery);
   const { pools } = data;
 
-  console.log("Pools", pools)
-
-
-
   return (
     <Suspense fallback={<Loading />}>
 

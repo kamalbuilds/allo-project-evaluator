@@ -4,6 +4,7 @@ import HomePage from './HomePage';
 import { TPoolDetail } from '../Pool/types';
 import request from 'graphql-request';
 import { getMicroGrants, graphqlEndpoint } from '@/utils/query';
+import { TNewApplicationResponse } from '@/types/types';
 
 const PoolDashboard = ({
     pool,
@@ -12,7 +13,7 @@ const PoolDashboard = ({
 }: {
     pool: any;
     poolMetadata: string;
-    applications: any
+    applications: TNewApplicationResponse[]
 }) => {
 
 

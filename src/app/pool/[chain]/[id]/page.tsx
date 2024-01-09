@@ -36,8 +36,6 @@ export default async function PoolDetail({
     console.error(error);
   }
 
-  console.log("Pool", pool, poolMetadata)
-
   const grantsDetails: any = await request(
     graphqlEndpoint,
     getMicroGrants,
@@ -47,13 +45,9 @@ export default async function PoolDetail({
     }
   );
 
-  console.log(grantsDetails, "grant");
-
   const Pool = grantsDetails.microGrant;
   const allocated = Pool.allocateds;
   const distributeds = Pool.distributeds;
-
-  console.log("Allocated in Pools", allocated, distributeds);
 
   let applications: TNewApplicationResponse[] = [];
 
@@ -69,7 +63,6 @@ export default async function PoolDetail({
         if (response.ok) {
           let metadata = await response.json();
           application.metadata = metadata;
-          console.log("metadata", metadata, application)
         }
       } catch (error) {
         console.error(error);

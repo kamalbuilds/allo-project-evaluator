@@ -36,8 +36,7 @@ const Allocatee = ({
                 )}
             </div>
 
-            {receipientbyAllocatee.map((item, index) => {
-                console.log("Item", item)
+            {receipientbyAllocatee.map((item: any, index: number) => {
                 return (
                     <div key={index} className='text-xl'>
 

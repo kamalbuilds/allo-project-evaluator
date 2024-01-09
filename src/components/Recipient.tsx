@@ -5,21 +5,10 @@ import { Status, statusColors } from '@/utils/helpers';
 import { ethers } from 'ethers';
 import { getNetworks } from '@/utils/networks';
 import { cn } from '../../lib/utils';
-import { Metadata } from '@/types/types';
-
-type IApplication = {
-    recipientId: string;
-    recipientAddress: string;
-    requestedAmount: string;
-    metadataPointer: string;
-    blockTimestamp: string;
-    isUsingRegistryAnchor: boolean;
-    status: string;
-    metadata: Metadata
-}
+import { Metadata, TNewApplicationResponse } from '@/types/types';
 
 type Props = {
-    application: IApplication;
+    application: TNewApplicationResponse;
     pool: any;
 }
 
@@ -28,18 +17,10 @@ const Recipient = ({ application, pool }: Props) => {
     const allocateds = pool.allocateds;
     const distributeds = pool.distributeds;
 
-    console.log("Applications", application);
-    console.log("Allocated", allocateds)
-    console.log("distributeds", distributeds);
-    console.log("Pool", pool);
-
-
     const allocatedsForThisReceipient = allocateds.filter(
         (allocated: any) =>
             allocated.recipientId === application.recipientId.toLowerCase(),
     );
-
-    console.log("allocatedsForThisReceipient", allocatedsForThisReceipient)
 
     const approvals = allocatedsForThisReceipient.filter(
         (allocation: any) => allocation.status === Status.Accepted.toString(),
@@ -49,7 +30,6 @@ const Recipient = ({ application, pool }: Props) => {
         (allocation: any) => allocation.status === Status.Rejected.toString(),
     );
 
-    console.log("Approvals", approvals, rejections, statusColors[application.status as keyof typeof statusColors]);
     return (
         <div className="space-y-8">
 

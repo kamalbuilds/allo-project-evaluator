@@ -22,23 +22,6 @@ export default async function ProfileDetailPage({
 
 
 
-  // const grantsDetails: any = await request(
-  //   graphqlEndpoint,
-  //   getMicroGrants,
-  //   {
-  //     poolId: "19",
-  //     chainId: params.chain,
-  //   }
-  // );
-
-  // console.log(grantsDetails, "grant");
-
-  // const allocated = grantsDetails.microGrant.allocateds;
-  // const distributeds = grantsDetails.microGrant.distributeds;
-
-  // console.log("Allocated", allocated, distributeds);
-
-
   const profile: TProfileDetail = profileDetails.profile;
 
   const response = await fetch(

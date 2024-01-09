@@ -9,19 +9,11 @@ const DistrbuitedList = ({
     pool
 }: any) => {
 
-    console.log("Distributee", distributee)
-
-    console.log("Applications", applications);
-
     const applicant = applications.filter((application: any) =>
         application.recipientId === distributee.recipientId.toLowerCase()
     )
 
-    console.log("Applicant", applicant);
-
     const applicantWon = applicant[0];
-
-
     return (
         <div className=''>
             <div className='text-xl'>

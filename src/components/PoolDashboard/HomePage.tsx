@@ -19,13 +19,14 @@ import { getNetworks } from '@/utils/networks';
 import { Address, ShortProfileId } from '../Address';
 import { getPoolStatus, getStrategyTypeFromStrategyName, statusColors } from '@/utils/helpers';
 import Link from 'next/link';
-import { EPoolStatus } from '@/types/types';
+import { EPoolStatus, TNewApplicationResponse } from '@/types/types';
 import { cn } from '../../../lib/utils';
 import Recipient from '../Recipient';
 import DistrbutedList from '../DistributedList';
 import DistrbuitedList from '../DistributedList';
 import Allocatee from '../Allocatee';
 import { IoIosWarning } from "react-icons/io";
+
 
 
 const HomePage = ({
@@ -35,7 +36,7 @@ const HomePage = ({
 }: {
     pool: any;
     poolMetadata: string;
-    applications: any;
+    applications: TNewApplicationResponse[];
 }) => {
     let metadataObj;
     try {
@@ -46,14 +47,10 @@ const HomePage = ({
         };
     }
 
-    console.log("pool", pool, applications);
-
     const status: EPoolStatus = getPoolStatus(
         pool.allocationStartTime,
         pool.allocationEndTime,
     );
-
-    console.log("Status", status);
 
     return (
         <div className="flex-1 pt-16 overflow-x-hidden overflow-y-auto ">
@@ -217,8 +214,7 @@ const HomePage = ({
                     {applications.length == 0 && <div>No receipients by the Pool</div>}
 
                     <div className='flex gap-4 overflow-scroll pb-8 pt-4'>
-                        {applications?.map((application) => {
-                            console.log("Application", application)
+                        {applications?.map((application: TNewApplicationResponse) => {
                             return (
                                 <>
                                     {application.metadata && (
@@ -244,7 +240,7 @@ const HomePage = ({
                                 <div>{pool.allocateds.length} allocatees have casted vote</div>
                             </div>
                             <div className='flex flex-col gap-4'>
-                                {pool?.allocateds.map((allocatee) => {
+                                {pool?.allocateds.map((allocatee: { transactionHash: any; }) => {
                                     return (
                                         <Allocatee key={allocatee?.transactionHash} allocatee={allocatee} applications={applications} />
                                     )
@@ -258,7 +254,7 @@ const HomePage = ({
                                 <div> You have {pool.distributeds.length} receipients who got grants</div>
                             </div>
                             <div className='flex flex-col gap-8'>
-                                {pool?.distributeds.map((distributee, index) => {
+                                {pool?.distributeds.map((distributee: any, index: React.Key | null | undefined) => {
                                     return (
                                         <div key={index} className='border-y-2 px-4 flex flex-col gap-4'>
                                             <DistrbuitedList distributee={distributee} applications={applications} pool={pool} />
