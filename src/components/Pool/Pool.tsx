@@ -11,6 +11,7 @@ import {
 import Link from "next/link";
 import { TPoolDetail } from "./types";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
+import { getStrategyTypeFromStrategyName } from "@/utils/helpers";
 
 const Pool = ({
   data,
@@ -21,6 +22,14 @@ const Pool = ({
   header?: string;
   description?: string;
 }) => {
+
+  const filterPool = (strategy: string) => {
+    const filteredArray = data.filter(item => getStrategyTypeFromStrategyName(item.strategyName) === strategy);
+    console.log("Filtered Array", filteredArray);
+  }
+
+
+
   const tableData: TTableData = {
     headers: [
       "ID",
@@ -31,9 +40,12 @@ const Pool = ({
       "Profile Owner",
       "Updated At",
       "Network",
-      "Strategy"
+      "Strategy",
+      "Strategy Name"
     ],
     rows: Object.values(data).map((pool: TPoolDetail) => {
+
+      console.log("Pool", pool);
 
       return [
         // eslint-disable-next-line react/jsx-key
@@ -43,6 +55,8 @@ const Pool = ({
         >
           {pool.poolId}
         </Link>,
+        // {getStrategyTypeFromStrategyName(pool.pool.strategyName)}
+
         ,
         // eslint-disable-next-line react/jsx-key
         <Address address={pool.strategy} chainId={Number(pool.chainId)} />,
@@ -54,7 +68,8 @@ const Pool = ({
         <Address address={pool.profile?.owner ?? ""} chainId={Number(pool.chainId)} />,
         (new Date(pool.updatedAt)).toLocaleString(),
         convertChainIdToNetworkName(Number(pool.chainId)),
-        <div key={pool.poolId}>{pool.strategy}</div>
+        <div key={pool.poolId}>{pool.strategy}</div>,
+        <div key={pool.poolId}>{getStrategyTypeFromStrategyName(pool.strategyName)}</div>
       ];
     }),
   };
@@ -62,13 +77,20 @@ const Pool = ({
   const isMobile = useMediaQuery(768);
 
   return (
-    <Table
-      data={tableData}
-      header={header}
-      description={description}
-      showPagination={true}
-      rowsPerPage={isMobile ? 5 : 10}
-    />
+    <>
+      <div onClick={() => filterPool("Manual")}>Manual</div>
+      <div onClick={() => filterPool("Governance")}>Governance</div>
+      <div>Hats</div>
+
+
+      <Table
+        data={tableData}
+        header={header}
+        description={description}
+        showPagination={true}
+        rowsPerPage={isMobile ? 5 : 10}
+      />
+    </>
   );
 };
 

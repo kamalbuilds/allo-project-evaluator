@@ -16,7 +16,7 @@ import { TPoolDetail } from '../Pool/types';
 import { convertChainIdToNetworkName } from '@/utils/utils';
 import { ethers } from 'ethers';
 import { getNetworks } from '@/utils/networks';
-import { Address, AddressResponsive, ShortProfileId } from '../Address';
+import { Address, ShortProfileId } from '../Address';
 import { getPoolStatus, getStrategyTypeFromStrategyName, statusColors } from '@/utils/helpers';
 import Link from 'next/link';
 import { EPoolStatus } from '@/types/types';

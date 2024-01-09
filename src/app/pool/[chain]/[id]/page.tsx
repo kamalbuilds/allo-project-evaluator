@@ -56,18 +56,6 @@ export default async function PoolDetail({
   console.log("Allocated in Pools", allocated, distributeds);
 
   let applications: TNewApplicationResponse[] = [];
-  // try {
-  //   const response = await fetch(
-  //     `https://gitcoin.mypinata.cloud/ipfs/${pool.metadataPointer}`,
-  //   );
-
-  //   // Check if the response status is OK (200)
-  //   if (response.ok) {
-  //     poolMetadata = await response.text();
-  //   }
-  // } catch (error) {
-  //   console.error(error);
-  // }
 
   for (let i = 0; i < Pool.microGrantRecipients.length; i++) {
     const application = Pool.microGrantRecipients[i];

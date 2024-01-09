@@ -15,7 +15,7 @@ const Table = ({
   description,
   rowsPerPage = 10,
   showPagination,
- }: {
+}: {
   data: TTableData;
   header: string | undefined | "";
   description: string | undefined | "";
@@ -49,9 +49,8 @@ const Table = ({
   return (
     <>
       <div
-        className={`px-4 sm:px-6 lg:px-8 ${
-          header || description ? "pt-2 mt-10" : ""
-        }`}
+        className={`px-4 sm:px-6 lg:px-8 ${header || description ? "pt-2 mt-10" : ""
+          }`}
       >
         <div className="sm:flex flex flex-col items-center">
           {(header || description) && (

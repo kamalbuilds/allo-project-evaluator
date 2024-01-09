@@ -1,6 +1,7 @@
 import { Loading } from "@/components/Loading";
 import Pool from "@/components/Pool/Pool";
 import { IPoolsResponse } from "@/components/Pool/types";
+import { getStrategyTypeFromStrategyName } from "@/utils/helpers";
 import { getPoolDataQuery, graphqlEndpoint } from "@/utils/query";
 import { request } from "graphql-request";
 import { Suspense } from "react";
@@ -11,8 +12,13 @@ export default async function PoolHome() {
   const data: IPoolsResponse = await request(graphqlEndpoint, getPoolDataQuery);
   const { pools } = data;
 
+  console.log("Pools", pools)
+
+
+
   return (
     <Suspense fallback={<Loading />}>
+
       <Pool
         data={pools}
         header={"Pools"}

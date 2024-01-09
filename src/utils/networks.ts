@@ -36,7 +36,7 @@ export const getNetworksBySlug = (slug: Slug): TNetworkData => {
   if (!network) {
     throw new Error(`Network ${slug} not found`);
   }
-  return network; 
+  return network;
 };
 // goerli, optimism-goerli, sepolia, pgn-sepolia, celo-alfajores
 export const getNetworks = (): INetwork => {
@@ -94,6 +94,15 @@ export const getNetworks = (): INetwork => {
       coreContracts: coreContracts,
       strategyContracts: strategyContracts,
       symbol: "arETH",
+    },
+    [11155111]: {
+      id: "11155111",
+      slug: Slug.SEPOLIA,
+      name: "Sepolia",
+      explorer: "https://sepolia.etherscan.io/",
+      coreContracts: coreContracts,
+      strategyContracts: strategyContracts,
+      symbol: "gETH",
     },
   };
 };
