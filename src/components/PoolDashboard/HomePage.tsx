@@ -25,7 +25,7 @@ import Recipient from '../Recipient';
 import DistrbuitedList from '../DistributedList';
 import Allocatee from '../Allocatee';
 import { IoIosWarning } from "react-icons/io";
-import { MicroGrantsStrategy } from "@allo-team/allo-v2-sdk/";
+import { MicroGrantsStrategy } from "@allo-team/allo-v2-sdk";
 import { useState } from 'react';
 
 const HomePage = ({
@@ -47,7 +47,7 @@ const HomePage = ({
     }
 
     const [strategy, setStrategy] = useState<MicroGrantsStrategy | null>(null);
-    console.log("Pool", pool)
+    // console.log("Pool", pool)
     console.log(pool.microGrantRecipients)
     const status: EPoolStatus = getPoolStatus(
         pool.allocationStartTime,
@@ -58,8 +58,10 @@ const HomePage = ({
         const strategy = new MicroGrantsStrategy({
             chain: pool.chainId,
             poolId: pool.poolId, // valid pool Id
+            rpc: getNetworks()[Number(pool.chainId)].rpc,
           });
         strategy?.setContract(pool.strategy);
+        console.log(strategy,"s strategy")
         setStrategy(strategy);
     };
 
@@ -85,6 +87,8 @@ const HomePage = ({
                             </Link>
                             {" "}Pool 👋
                         </h2>
+
+                        <button onClick={microstrategy}>Call microgrants</button>
                         <div className="hidden md:flex items-center space-x-2">
                             <CalendarDateRangePicker allocationStartTime={pool.allocationStartTime} allocationEndTime={pool.allocationEndTime} />
                         </div>

@@ -94,6 +94,7 @@ export const getNetworks = (): INetwork => {
       coreContracts: coreContracts,
       strategyContracts: strategyContracts,
       symbol: "arETH",
+      rpc: "https://sepolia-rollup.arbitrum.io/rpc"
     },
     [11155111]: {
       id: "11155111",

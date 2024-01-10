@@ -67,6 +67,7 @@ export type TNetworkData = {
   coreContracts: ICoreContracts;
   strategyContracts: IStrategyContracts;
   symbol: string;
+  rpc?: string;
 };
 
 export type TTableData = {

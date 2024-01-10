@@ -69,7 +69,7 @@ const navigation = {
     },
     {
       name: "GitHub",
-      href: "https://github.com/kamalbuilds/allo-qv-explorer/",
+      href: "https://github.com/kamalbuilds/alloproject-evaluator/",
       icon: (props: any) => (
         <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
           <path
