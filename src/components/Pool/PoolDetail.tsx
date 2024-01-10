@@ -85,7 +85,7 @@ const PoolDetailPage = ({
               Amount
             </dt>
             <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-              {ethers.formatUnits(
+              {ethers.utils.formatUnits(
                 pool.amount ?? 0,
                 pool.tokenMetadata.decimals ?? 18,
               )}{" "}

@@ -4,6 +4,7 @@ import { Disclosure } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import Link from "next/link";
+import { ConnectWallet } from "@thirdweb-dev/react";
 
 const Navbar = () => {
   return (
@@ -54,6 +55,9 @@ const Navbar = () => {
                 >
                   Contracts
                 </Link>
+              </div>
+              <div className="hidden lg:flex items-center ml-auto">
+                <ConnectWallet />
               </div>
               <div className="flex items-center lg:hidden">
                 {/* Mobile menu button */}

@@ -71,7 +71,7 @@ const Recipient = ({ application, pool }: Props) => {
                         <p className="text-sm font-medium leading-none">Amount</p>
                     </div>
                     <div className="ml-auto font-medium">
-                        {ethers.formatUnits(
+                        {ethers.utils.formatUnits(
                             application.requestedAmount ?? 0,
                             pool.pool.tokenMetadata.decimals ?? 18,
                         )}{" "}

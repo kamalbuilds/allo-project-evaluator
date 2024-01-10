@@ -22,12 +22,11 @@ import Link from 'next/link';
 import { EPoolStatus, TNewApplicationResponse } from '@/types/types';
 import { cn } from '../../../lib/utils';
 import Recipient from '../Recipient';
-import DistrbutedList from '../DistributedList';
 import DistrbuitedList from '../DistributedList';
 import Allocatee from '../Allocatee';
 import { IoIosWarning } from "react-icons/io";
-
-
+import { MicroGrantsStrategy } from "@allo-team/allo-v2-sdk/";
+import { useState } from 'react';
 
 const HomePage = ({
     pool,
@@ -47,12 +46,22 @@ const HomePage = ({
         };
     }
 
+    const [strategy, setStrategy] = useState<MicroGrantsStrategy | null>(null);
     console.log("Pool", pool)
-
+    console.log(pool.microGrantRecipients)
     const status: EPoolStatus = getPoolStatus(
         pool.allocationStartTime,
         pool.allocationEndTime,
     );
+
+    const microstrategy = () => {
+        const strategy = new MicroGrantsStrategy({
+            chain: pool.chainId,
+            poolId: pool.poolId, // valid pool Id
+          });
+        strategy?.setContract(pool.strategy);
+        setStrategy(strategy);
+    };
 
     return (
         <div className="flex-1 pt-16 overflow-x-hidden overflow-y-auto ">
@@ -62,8 +71,10 @@ const HomePage = ({
 
                     {status === 'Ended' && <div className='text-md flex flex-row items-center gap-2 font-normal text-red-500'>
                         <IoIosWarning color={"rgb(216 15 15)"} />
-                        <div> This Pool is Ended and Rewards have been distributed</div>
+                        <div> This Pool has Ended and the Rewards have been distributed</div>
                     </div>}
+
+                    {pool.microGrantRecipients && <div className='text-2xl pt-8 font-bold tracking-tight'>Micro Grants Recipients </div>} 
 
 
                     <div className="flex items-center justify-between space-y-2">
@@ -111,7 +122,7 @@ const HomePage = ({
                                     </CardHeader>
                                     <CardContent>
                                         <div className="text-2xl font-bold">
-                                            {ethers.formatUnits(
+                                            {ethers.utils.formatUnits(
                                                 pool.pool.amount ?? 0,
                                                 pool.pool.tokenMetadata.decimals ?? 18,
                                             )}{" "}

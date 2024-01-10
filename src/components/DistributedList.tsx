@@ -29,7 +29,7 @@ const DistrbuitedList = ({
                 <div className='flex flex-row justify-between'>
                     <div className='text-md text-gray-500'>Amount Received</div>
                     <div className='text-md text-gray-500'>
-                        {ethers.formatUnits(
+                        {ethers.utils.formatUnits(
                             distributee.amount ?? 0,
                             pool.pool.tokenMetadata.decimals ?? 18,
                         )}{" "}

@@ -7,12 +7,12 @@ export const convertChainIdToNetworkName = (chainId: number) => {
   return `${networks[chainId]?.name} (${chainId})`;
 };
 
-export function classNames(...classes: string[]) {
+export function clsassNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
 
 export function formatAmount(amount: number, decimals: number) {
-  return ethers.formatUnits(amount, decimals);
+  return ethers.utils.formatUnits(amount, decimals);
 }
 
 export function truncatePoolName(name: string) {
