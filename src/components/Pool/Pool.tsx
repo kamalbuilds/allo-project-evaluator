@@ -44,8 +44,6 @@ const Pool = ({
     ],
     rows: Object.values(filteredPool).map((pool: TPoolDetail) => {
 
-      console.log("Pool", pool);
-
       return [
         // eslint-disable-next-line react/jsx-key
         <Link
