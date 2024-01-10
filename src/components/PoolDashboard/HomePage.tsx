@@ -27,6 +27,7 @@ import Allocatee from '../Allocatee';
 import { IoIosWarning } from "react-icons/io";
 import { MicroGrantsStrategy } from "@allo-team/allo-v2-sdk";
 import { useState } from 'react';
+import Banner from '../Banner';
 
 const HomePage = ({
     pool,
@@ -59,9 +60,9 @@ const HomePage = ({
             chain: pool.chainId,
             poolId: pool.poolId, // valid pool Id
             rpc: getNetworks()[Number(pool.chainId)].rpc,
-          });
+        });
         strategy?.setContract(pool.strategy);
-        console.log(strategy,"s strategy")
+        console.log(strategy, "s strategy")
         setStrategy(strategy);
     };
 
@@ -76,7 +77,7 @@ const HomePage = ({
                         <div> This Pool has Ended and the Rewards have been distributed</div>
                     </div>}
 
-                    {pool.microGrantRecipients && <div className='text-2xl pt-8 font-bold tracking-tight'>Micro Grants Recipients </div>} 
+                    {pool.microGrantRecipients && <div className='text-2xl pt-8 font-bold tracking-tight'>Micro Grants Recipients </div>}
 
 
                     <div className="flex items-center justify-between space-y-2">
@@ -235,7 +236,14 @@ const HomePage = ({
                             return (
                                 <>
                                     {application.metadata && (
-                                        <div className='flex flex-1 min-w-[350px]  py-4 rounded-lg flex-col border border-whitesmoke' key={application.blockTimestamp}>
+                                        <div className='flex flex-1 min-w-[350px] pb-4 rounded-lg flex-col border border-whitesmoke' key={application.blockTimestamp}>
+                                            <div className="flex items-center gap-x-4 rounded-lg border-b border-gray-900/5 bg-gray-50">
+                                                <Banner
+                                                    image={application.applicationBanner}
+                                                    alt={application.metadata!.name}
+                                                />
+                                            </div>
+
                                             <div className='ml-4 h-[100px] flex flex-col gap-2'>
                                                 <div className='text-[24px]'> {application.metadata.name}</div>
                                                 <div>{application.metadata.description.slice(0, 100)}...</div>
