@@ -48,11 +48,9 @@ const HomePage = ({
     }
 
     const [strategy, setStrategy] = useState<MicroGrantsStrategy | null>(null);
-    // console.log("Pool", pool)
-    console.log(pool.microGrantRecipients)
     const status: EPoolStatus = getPoolStatus(
-        pool.allocationStartTime,
-        pool.allocationEndTime,
+        pool?.allocationStartTime,
+        pool?.allocationEndTime,
     );
 
     const microstrategy = () => {
@@ -62,7 +60,6 @@ const HomePage = ({
             rpc: getNetworks()[Number(pool.chainId)].rpc,
         });
         strategy?.setContract(pool.strategy);
-        console.log(strategy, "s strategy")
         setStrategy(strategy);
     };
 
@@ -77,7 +74,7 @@ const HomePage = ({
                         <div> This Pool has Ended and the Rewards have been distributed</div>
                     </div>}
 
-                    {pool.microGrantRecipients && <div className='text-2xl pt-8 font-bold tracking-tight'>Micro Grants Recipients </div>}
+                    {pool?.microGrantRecipients && <div className='text-2xl pt-8 font-bold tracking-tight'>Micro Grants Recipients </div>}
 
 
                     <div className="flex items-center justify-between space-y-2">
@@ -91,7 +88,7 @@ const HomePage = ({
 
                         <button onClick={microstrategy}>Call microgrants</button>
                         <div className="hidden md:flex items-center space-x-2">
-                            <CalendarDateRangePicker allocationStartTime={pool.allocationStartTime} allocationEndTime={pool.allocationEndTime} />
+                            <CalendarDateRangePicker allocationStartTime={pool?.allocationStartTime} allocationEndTime={pool?.allocationEndTime} />
                         </div>
                     </div>
 
@@ -129,7 +126,7 @@ const HomePage = ({
                                         <div className="text-2xl font-bold">
                                             {ethers.utils.formatUnits(
                                                 pool.pool.amount ?? 0,
-                                                pool.pool.tokenMetadata.decimals ?? 18,
+                                                pool.pool?.tokenMetadata.decimals ?? 18,
                                             )}{" "}
                                             {pool.pool.tokenMetadata.symbol ??
                                                 getNetworks()[Number(pool.chainId)].symbol}
@@ -159,7 +156,7 @@ const HomePage = ({
                                     </CardHeader>
                                     <CardContent>
                                         <div className="text-2xl font-bold">
-                                            {getStrategyTypeFromStrategyName(pool.pool.strategyName)}
+                                            {getStrategyTypeFromStrategyName(pool.pool?.strategyName)}
                                         </div>
                                         <p className="text-xs text-muted-foreground">
                                             <Address
@@ -190,7 +187,7 @@ const HomePage = ({
                                         </CardHeader>
                                         <CardContent>
                                             <div className="text-2xl font-bold">
-                                                {pool.pool.profile.name}
+                                                {pool.pool.profile?.name}
                                             </div>
                                             <p className="text-xs text-muted-foreground">
                                                 <ShortProfileId profileId={pool.pool.profile?.profileId} />
