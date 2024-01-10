@@ -3,7 +3,7 @@ import {
   IProfileDetailResponse,
   TProfileDetail,
 } from "@/components/Registry/types";
-import { getProfileDetailDataQuery, graphqlEndpoint , getMicroGrants} from "@/utils/query";
+import { getProfileDetailDataQuery, graphqlEndpoint, getMicroGrants } from "@/utils/query";
 import request from "graphql-request";
 
 export default async function ProfileDetailPage({
@@ -22,21 +22,10 @@ export default async function ProfileDetailPage({
 
 
 
-  const grantsDetails = await request(
-    graphqlEndpoint,
-    getMicroGrants,
-    {
-      poolId: "19",
-      chainId: params.chain,
-    }
-  );
-
-  console.log(grantsDetails,"grant");
-
   const profile: TProfileDetail = profileDetails.profile;
 
   const response = await fetch(
-    `https://gitcoin.mypinata.cloud/ipfs/${profile.metadataPointer}`,
+    `https://gitcoin.mypinata.cloud/ipfs/${profile?.metadataPointer}`,
   );
 
   let metadata = "";

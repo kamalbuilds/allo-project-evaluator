@@ -48,23 +48,17 @@ export const Contracts = () => {
       <Table
         data={dataCore}
         header={"Allo Core Contracts"}
-        description={
-          !isMobile
-            ? "A list of all the core contracts in the registry on all supported networks"
-            : ""
-        }
-        showPagination={false}
-      />
+        description={!isMobile
+          ? "A list of all the core contracts in the registry on all supported networks"
+          : ""}
+        showPagination={false} activeState={undefined} filterPool={undefined} clearSelect={undefined} />
       <Table
         data={dataStrategy}
         header={"Cloneable Strategy Contracts"}
-        description={
-          !isMobile
-            ? "A list of all the strategy contracts in the registry on all supported networks"
-            : ""
-        }
-        showPagination={false}
-      />
+        description={!isMobile
+          ? "A list of all the strategy contracts in the registry on all supported networks"
+          : ""}
+        showPagination={false} activeState={undefined} filterPool={undefined} clearSelect={undefined} />
     </div>
   );
 };

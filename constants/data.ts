@@ -3,93 +3,49 @@ import { NavItem, SidebarNavItem } from "../types";
 
 export type User = {
   id: number;
-  name: string;
-  company: string;
-  role: string;
-  verified: boolean;
+  recipientId: string;
+  sender: string;
+  transactionHash: string;
   status: string;
 };
+
 export const users: User[] = [
   {
     id: 1,
-    name: "Candice Schiner",
-    company: "Dell",
-    role: "Frontend Developer",
-    verified: false,
-    status: "Active",
+    recipientId: "0xa834ca9c58df55d18659c2476fceb7c17d8de215",
+    sender: "0x4f4c70c011b065dc45a7a13cb72e645c6a50dde3",
+    transactionHash: "0x0738b22113793a8f8f2d3240b26e9e6933f328264ce45844f949d9b8da10752c",
+    status: "2",
   },
   {
     id: 2,
-    name: "John Doe",
-    company: "TechCorp",
-    role: "Backend Developer",
-    verified: true,
-    status: "Active",
+    recipientId: "0xa834ca9c58df55d18659c2476fceb7c17d8de215",
+    sender: "0x4f4c70c011b065dc45a7a13cb72e645c6a50dde3",
+    transactionHash: "0x0738b22113793a8f8f2d3240b26e9e6933f328264ce45844f949d9b8da10752c",
+    status: "2",
   },
   {
     id: 3,
-    name: "Alice Johnson",
-    company: "WebTech",
-    role: "UI Designer",
-    verified: true,
-    status: "Active",
+    recipientId: "0xa834ca9c58df55d18659c2476fceb7c17d8de215",
+    sender: "0x4f4c70c011b065dc45a7a13cb72e645c6a50dde3",
+    transactionHash: "0x0738b22113793a8f8f2d3240b26e9e6933f328264ce45844f949d9b8da10752c",
+    status: "2",
   },
   {
     id: 4,
-    name: "David Smith",
-    company: "Innovate Inc.",
-    role: "Fullstack Developer",
-    verified: false,
-    status: "Inactive",
+    recipientId: "0xa834ca9c58df55d18659c2476fceb7c17d8de215",
+    sender: "0x4f4c70c011b065dc45a7a13cb72e645c6a50dde3",
+    transactionHash: "0x0738b22113793a8f8f2d3240b26e9e6933f328264ce45844f949d9b8da10752c",
+    status: "2",
   },
   {
     id: 5,
-    name: "Emma Wilson",
-    company: "TechGuru",
-    role: "Product Manager",
-    verified: true,
-    status: "Active",
+    recipientId: "0xa834ca9c58df55d18659c2476fceb7c17d8de215",
+    sender: "0x4f4c70c011b065dc45a7a13cb72e645c6a50dde3",
+    transactionHash: "0x0738b22113793a8f8f2d3240b26e9e6933f328264ce45844f949d9b8da10752c",
+    status: "2",
   },
-  {
-    id: 6,
-    name: "James Brown",
-    company: "CodeGenius",
-    role: "QA Engineer",
-    verified: false,
-    status: "Active",
-  },
-  {
-    id: 7,
-    name: "Laura White",
-    company: "SoftWorks",
-    role: "UX Designer",
-    verified: true,
-    status: "Active",
-  },
-  {
-    id: 8,
-    name: "Michael Lee",
-    company: "DevCraft",
-    role: "DevOps Engineer",
-    verified: false,
-    status: "Active",
-  },
-  {
-    id: 9,
-    name: "Olivia Green",
-    company: "WebSolutions",
-    role: "Frontend Developer",
-    verified: true,
-    status: "Active",
-  },
-  {
-    id: 10,
-    name: "Robert Taylor",
-    company: "DataTech",
-    role: "Data Analyst",
-    verified: false,
-    status: "Active",
-  },
+
 ];
 
 export type Employee = {

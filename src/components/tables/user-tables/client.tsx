@@ -10,18 +10,21 @@ import { Separator } from "@/components/ui/separator";
 
 interface ProductsClientProps {
   data: User[];
+  Allocatees: any;
 }
 
-export const UserClient: React.FC<ProductsClientProps> = ({ data }) => {
+export const UserClient: React.FC<ProductsClientProps> = ({ data, Allocatees }) => {
   const params = useParams();
   const router = useRouter();
+
+
 
   return (
     <>
       <div className="flex items-start justify-between">
         <Heading
-          title={`Users (${data.length})`}
-          description="Manage users for your business"
+          title={`Allocatees (${data.length})`}
+          description="Users that have been allocated in the pool"
         />
         <Button
           className="text-xs md:text-sm"
