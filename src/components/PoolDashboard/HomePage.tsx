@@ -49,8 +49,7 @@ const HomePage = ({
             error: "Error parsing metadata",
         };
     }
-    // const signer = useSigner();
-    // console.log(signer,"signer");
+
     const [strategy, setStrategy] = useState<MicroGrantsStrategy | null>(null);
     const [sdk,setSdk] = useState<ThirdwebSDK | null>(null);
     // console.log("Pool", pool)
@@ -71,15 +70,15 @@ const HomePage = ({
     };
 
     const allocations = [
-        { recipientId: "0x9a33fD05dCF5A4096adA6110ad679674408c1d7D", status: 1 },
-        { recipientId: "0x0439427C42a099E7E362D86e2Bbe1eA27300f6Cb", status: 1 },
+        { recipientId: "9a33fD05dCF5A4096adA6110ad679674408c1d7D", status: 1 },
+        { recipientId: "0439427C42a099E7E362D86e2Bbe1eA27300f6Cb", status: 1 },
         ];
-
+        // @ts-ignore
         const txData = strategy?.getBatchAllocationData(allocations);
         console.log(txData,"txData")
 
         const sendTransaction = async (txData: any) => {
-            const tx = await sdk.wallet.sendRawTransaction(txData);
+            const tx = await sdk?.wallet.sendRawTransaction(txData);
             console.log(tx,"tx")
             return tx;
           }
@@ -95,6 +94,8 @@ const HomePage = ({
             if(window?.ethereum){
                 const provider = new ethers.providers.Web3Provider(window.ethereum);
                 const signer = provider.getSigner();
+                console.log(signer,"signer",provider);
+                // @ts-ignore
                 const sdk = ThirdwebSDK.fromSigner({signer: signer, network: pool.chainId});
                 setSdk(sdk);
             }
