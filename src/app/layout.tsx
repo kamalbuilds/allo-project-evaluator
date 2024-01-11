@@ -1,4 +1,5 @@
-"use client"
+"use client";
+
 import { NetworkContextProvider } from "@/Context/NetworkContext";
 import Navbar from "@/components/Navbar";
 // import type { Metadata } from "next";
