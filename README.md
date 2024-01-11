@@ -35,6 +35,21 @@ The Dapp also allows allocators to allocate to applications and enables users to
 - Facilitating efficient allocation of funds and submission of applications for specific projects.
 - Enabling users to track and manage multiple pools and their associated details.
 
+### Pool Dashboard
+![s1](https://github.com/kamalbuilds/allo-project-evaluator/assets/95926324/0e1489a3-8f2a-404d-bf8c-6b7dced2797e)
+
+### Allocation and Distribution Analysis
+![s2](https://github.com/kamalbuilds/allo-project-evaluator/assets/95926324/5dbf5652-41f2-4fb5-a55f-8063afadb008)
+
+### Profile Dashboard
+![image](https://github.com/kamalbuilds/allo-project-evaluator/assets/95926324/a49125ee-bd72-4880-a09c-dcbf2d7c2860)
+
+### Filter based on Different Strategies
+![s3](https://github.com/kamalbuilds/allo-project-evaluator/assets/95926324/74b9eddc-0e19-42d7-9d2c-7d87e587ac4f)
+
+### eg: Hats Strategy Filtered
+![s4](https://github.com/kamalbuilds/allo-project-evaluator/assets/95926324/b8e0db93-d060-4db7-b7a4-20a83af5ace3)
+
 ### Future Development
 
 - Integrate with other Strategies to expand the range of allo strategies supported.
