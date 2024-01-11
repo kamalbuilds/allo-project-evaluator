@@ -11,7 +11,7 @@ import { profile } from "console";
 
 const Profile = ({ data }: { data: TProfileDetail[] }) => {
 
-  console.log("Profile", data)
+  // console.log("Profile", data)
 
   const tableData: TTableData = {
     headers: ["ID", "Anchor", "Name", "Updated At", "Sender", "Network"],

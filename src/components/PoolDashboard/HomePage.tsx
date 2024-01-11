@@ -75,7 +75,7 @@ const HomePage = ({
         ];
         // @ts-ignore
         const txData = strategy?.getBatchAllocationData(allocations);
-        console.log(txData,"txData")
+        // console.log(txData,"txData")
 
         const sendTransaction = async (txData: any) => {
             const tx = await sdk?.wallet.sendRawTransaction(txData);
@@ -107,7 +107,7 @@ const HomePage = ({
             {pool && (
                 <div className="flex-1 space-y-4 p-4 md:p-8 pt-6">
             
-                    <button onClick={sendTransaction}>Call microgrants</button>
+                    {/* <button onClick={sendTransaction}>Call microgrants</button> */}
 
                     <div className="flex items-center justify-between space-y-2">
                         <h2 className="text-3xl font-bold tracking-tight">
@@ -118,7 +118,7 @@ const HomePage = ({
                             {" "}Pool 👋
                         </h2>
 
-                        <button onClick={microstrategy}>Call microgrants</button>
+                        {/* <button onClick={microstrategy}>Call microgrants</button> */}
                         <div className="hidden md:flex items-center space-x-2">
                             <CalendarDateRangePicker allocationStartTime={pool?.allocationStartTime} allocationEndTime={pool?.allocationEndTime} />
                         </div>

@@ -126,7 +126,6 @@ export function EmployeeTable<TData, TValue>({
   });
 
   const searchValue = table.getColumn(searchKey)?.getFilterValue() as string;
-  console.log("searchValue", searchValue);
 
   // React.useEffect(() => {
   //   if (debounceValue.length > 0) {

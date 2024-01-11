@@ -7,6 +7,7 @@ import { getNetworks } from '@/utils/networks';
 import { cn } from '../../lib/utils';
 import { Metadata, TNewApplicationResponse } from '@/types/types';
 import Banner from './Banner';
+import { Web3Button } from '@thirdweb-dev/react';
 
 type Props = {
     application: TNewApplicationResponse;
@@ -14,6 +15,10 @@ type Props = {
 }
 
 const Recipient = ({ application, pool }: Props) => {
+
+    const alertnotallocate =() => {
+        alert("You are not an allocate of this pool ❌")
+    }
 
     const allocateds = pool.allocateds;
     const distributeds = pool.distributeds;
@@ -102,6 +107,8 @@ const Recipient = ({ application, pool }: Props) => {
                     </div>
 
                 </div>
+
+                <button className="w-full hover:bg-green-400 p-4 text-orange-600" onClick={() => alertnotallocate()}>Allocate</button>
             </div>
         </div>
     );

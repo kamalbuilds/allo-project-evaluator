@@ -32,8 +32,6 @@ export default async function ProfileDetailPage({
 
   if (response.ok) metadata = await response.text();
 
-  console.log("MEtadata", metadata)
-
   return (
     <>
       <ProfileDetail profile={profile} metadata={metadata} />
