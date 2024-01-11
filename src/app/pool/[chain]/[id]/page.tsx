@@ -4,6 +4,8 @@ import PoolDashboard from "@/components/PoolDashboard";
 import { TNewApplicationResponse } from "@/types/types";
 import { getMicroGrants, getPoolDetailDataQuery, graphqlEndpoint } from "@/utils/query";
 import { request } from "graphql-request";
+import ErrorPage from "./errorPage";
+import { getIPFSClient } from "@/utils/ipfs";
 
 export default async function PoolDetail({
   params,
@@ -45,16 +47,28 @@ export default async function PoolDetail({
     }
   );
 
-  const Pool = grantsDetails.microGrant;
-  const allocated = Pool.allocateds;
-  const distributeds = Pool.distributeds;
+  const Pool = grantsDetails?.microGrant;
 
   let applications: TNewApplicationResponse[] = [];
 
-  for (let i = 0; i < Pool.microGrantRecipients.length; i++) {
-    const application = Pool.microGrantRecipients[i];
+  for (let i = 0; i < Pool?.microGrantRecipients.length; i++) {
+    const application = Pool?.microGrantRecipients[i];
     if (application.metadataPointer !== "") {
       try {
+
+        const metadata = await getIPFSClient().fetchJson(
+          application.metadataPointer,
+        );
+        console.log("Metadata", metadata);
+        application.metadata = metadata;
+        if (metadata.base64Image) {
+          const image = await getIPFSClient().fetchJson(metadata.base64Image);
+          console.log("image", image, image.data);
+          application.applicationBanner = image.data;
+        }
+
+        console.log("Application", application)
+
         const response = await fetch(
           `https://gitcoin.mypinata.cloud/ipfs/${application.metadataPointer}`,
         );
@@ -65,7 +79,7 @@ export default async function PoolDetail({
           application.metadata = metadata;
         }
       } catch (error) {
-        console.error(error);
+        console.error("Error", error);
       }
     }
 
@@ -74,7 +88,7 @@ export default async function PoolDetail({
 
   return (
     <>
-      <PoolDashboard pool={Pool} poolMetadata={poolMetadata} applications={applications} />
+      {pool.strategyName ? <PoolDashboard pool={Pool} poolMetadata={poolMetadata} applications={applications} /> : <ErrorPage />}
     </>
   );
 }

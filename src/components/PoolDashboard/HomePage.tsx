@@ -27,6 +27,7 @@ import Allocatee from '../Allocatee';
 import { IoIosWarning } from "react-icons/io";
 import { MicroGrantsStrategy } from "@allo-team/allo-v2-sdk";
 import { useState } from 'react';
+import Banner from '../Banner';
 import {  utils , Signer} from "ethers";
 import {  ThirdwebSDK } from "@thirdweb-dev/sdk";
 import { useSigner, Web3Button } from "@thirdweb-dev/react";
@@ -55,8 +56,8 @@ const HomePage = ({
     // console.log("Pool", pool)
     console.log(pool.microGrantRecipients)
     const status: EPoolStatus = getPoolStatus(
-        pool.allocationStartTime,
-        pool.allocationEndTime,
+        pool?.allocationStartTime,
+        pool?.allocationEndTime,
     );
 
     const microstrategy = () => {
@@ -64,9 +65,8 @@ const HomePage = ({
             chain: pool.chainId,
             poolId: pool.poolId, // valid pool Id
             rpc: getNetworks()[Number(pool.chainId)].rpc,
-          });
+        });
         strategy?.setContract(pool.strategy);
-        console.log(strategy,"s strategy")
         setStrategy(strategy);
     };
 
@@ -110,7 +110,8 @@ const HomePage = ({
                         <IoIosWarning color={"rgb(216 15 15)"} />
                         <div> This Pool has Ended and the Rewards have been distributed</div>
                     </div>}
-
+            
+                    {pool?.microGrantRecipients && <div className='text-2xl pt-8 font-bold tracking-tight'>Micro Grants Recipients </div>}
                     {pool.microGrantRecipients && <div className='text-2xl pt-8 font-bold tracking-tight'>Micro Grants Recipients </div>} 
                     <button onClick={sendTransaction}>Call microgrants</button>
 
@@ -125,7 +126,7 @@ const HomePage = ({
 
                         <button onClick={microstrategy}>Call microgrants</button>
                         <div className="hidden md:flex items-center space-x-2">
-                            <CalendarDateRangePicker allocationStartTime={pool.allocationStartTime} allocationEndTime={pool.allocationEndTime} />
+                            <CalendarDateRangePicker allocationStartTime={pool?.allocationStartTime} allocationEndTime={pool?.allocationEndTime} />
                         </div>
                     </div>
 
@@ -163,7 +164,7 @@ const HomePage = ({
                                         <div className="text-2xl font-bold">
                                             {ethers.utils.formatUnits(
                                                 pool.pool.amount ?? 0,
-                                                pool.pool.tokenMetadata.decimals ?? 18,
+                                                pool.pool?.tokenMetadata.decimals ?? 18,
                                             )}{" "}
                                             {pool.pool.tokenMetadata.symbol ??
                                                 getNetworks()[Number(pool.chainId)].symbol}
@@ -193,7 +194,7 @@ const HomePage = ({
                                     </CardHeader>
                                     <CardContent>
                                         <div className="text-2xl font-bold">
-                                            {getStrategyTypeFromStrategyName(pool.pool.strategyName)}
+                                            {getStrategyTypeFromStrategyName(pool.pool?.strategyName)}
                                         </div>
                                         <p className="text-xs text-muted-foreground">
                                             <Address
@@ -224,7 +225,7 @@ const HomePage = ({
                                         </CardHeader>
                                         <CardContent>
                                             <div className="text-2xl font-bold">
-                                                {pool.pool.profile.name}
+                                                {pool.pool.profile?.name}
                                             </div>
                                             <p className="text-xs text-muted-foreground">
                                                 <ShortProfileId profileId={pool.pool.profile?.profileId} />
@@ -270,7 +271,14 @@ const HomePage = ({
                             return (
                                 <>
                                     {application.metadata && (
-                                        <div className='flex flex-1 min-w-[350px]  py-4 rounded-lg flex-col border border-whitesmoke' key={application.blockTimestamp}>
+                                        <div className='flex flex-1 min-w-[350px] pb-4 rounded-lg flex-col border border-whitesmoke' key={application.blockTimestamp}>
+                                            <div className="flex items-center gap-x-4 rounded-lg border-b border-gray-900/5 bg-gray-50">
+                                                <Banner
+                                                    image={application.applicationBanner}
+                                                    alt={application.metadata!.name}
+                                                />
+                                            </div>
+
                                             <div className='ml-4 h-[100px] flex flex-col gap-2'>
                                                 <div className='text-[24px]'> {application.metadata.name}</div>
                                                 <div>{application.metadata.description.slice(0, 100)}...</div>

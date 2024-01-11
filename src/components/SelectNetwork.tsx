@@ -2,11 +2,11 @@
 
 import { getNetworks, getNetworksBySlug } from "@/utils/networks";
 import { INetwork, Slug, TNetworkData } from "../types/types";
-    import { Fragment, useContext } from 'react'
+import { Fragment, useContext } from 'react'
 import { Menu, Transition } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import { NetworkContext } from "@/Context/NetworkContext";
-import { classNames } from "@/utils/utils";
+import { clsassNames } from "@/utils/utils";
 
 const SelectNetwork = (props: {}) => {
   const networks: INetwork = getNetworks();
@@ -41,7 +41,7 @@ const SelectNetwork = (props: {}) => {
                   {({ active }) => (
                     <div
                       onClick={() => setNetwork(n.slug)}
-                      className={classNames(
+                      className={clsassNames(
                         active ? "bg-gray-100 text-gray-900" : "text-gray-700",
                         "block px-4 py-2 text-sm",
                       )}

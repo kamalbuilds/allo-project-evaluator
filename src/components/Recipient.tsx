@@ -6,6 +6,7 @@ import { ethers } from 'ethers';
 import { getNetworks } from '@/utils/networks';
 import { cn } from '../../lib/utils';
 import { Metadata, TNewApplicationResponse } from '@/types/types';
+import Banner from './Banner';
 
 type Props = {
     application: TNewApplicationResponse;
@@ -33,6 +34,8 @@ const Recipient = ({ application, pool }: Props) => {
     return (
         <div className="space-y-8">
 
+
+
             <div className="flex items-center mx-4">
                 <div className=" space-y-1">
                     <p className="text-sm font-medium leading-none">Status</p>
@@ -41,6 +44,8 @@ const Recipient = ({ application, pool }: Props) => {
                 {application.status === 'Accepted' && <div className="hover:underline px-2 py-1 text-green-700 bg-green-50 ml-auto font-medium">{application.status}</div>}
                 {application.status === 'Rejected' && <div className="hover:underline px-2 py-1 text-red-700 bg-red-50 ml-auto font-medium">{application.status}</div>}
             </div>
+
+
 
 
             <div className='mx-4 flex gap-4 flex-col'>

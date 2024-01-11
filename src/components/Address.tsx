@@ -50,7 +50,7 @@ export const ShortProfileId = (props: { profileId: string }) => {
 
 export const Address = (props: { address: string; chainId: number }) => {
   const explorerLink =
-    getNetworks()[props.chainId].explorer + "address/" + props.address;
+    getNetworks()[props.chainId]?.explorer + "address/" + props.address;
 
   return (
     <div className="flex items-center">
