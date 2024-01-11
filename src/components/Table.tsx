@@ -10,6 +10,7 @@ import { Fragment } from 'react'
 import { Menu, Transition } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import { IoMdClose } from "react-icons/io";
+import { usePathname } from "next/navigation";
 
 /** TODO: the mobile view needs to be completed
  * we could create a new component for mobile view entirely
@@ -60,6 +61,11 @@ const Table = ({
     return classes.filter(Boolean).join(' ')
   }
 
+  const pathname = usePathname();
+  const isPoolPage = pathname == '/pool';
+
+  console.log("Is Pool Page", isPoolPage);
+
 
 
   return (
@@ -85,7 +91,7 @@ const Table = ({
           )}
         </div>
 
-        <div className="flex justify-end">
+        {isPoolPage && <div className="flex justify-end">
           <Menu as="div" className="relative text-left">
             <div>
               <Menu.Button className="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
@@ -166,7 +172,7 @@ const Table = ({
             </Transition>
           </Menu>
 
-        </div>
+        </div>}
 
 
 

@@ -43,6 +43,8 @@ const ProfileDetail = ({
   const isMobile = useMediaQuery(768);
   const py = isMobile ? "py-2" : "py-6";
 
+  console.log("Profile", profile)
+
   return (
     <div className="pb-10">
 
@@ -95,8 +97,8 @@ const ProfileDetail = ({
                 </CardHeader>
                 <CardContent>
                   <div className="text-md font-bold">
-                    <Address address={profile.anchor}
-                      chainId={Number(profile.chainId)} />
+                    {profile?.anchor && <Address address={profile?.anchor}
+                      chainId={Number(profile.chainId)} />}
                   </div>
                 </CardContent>
               </Card>
@@ -123,8 +125,8 @@ const ProfileDetail = ({
                 </CardHeader>
                 <CardContent>
                   <div className="text-md font-bold">
-                    <Address address={profile.creator}
-                      chainId={Number(profile.chainId)} />
+                    {profile?.creator && <Address address={profile?.creator}
+                      chainId={Number(profile.chainId)} />}
                   </div>
                 </CardContent>
               </Card>
@@ -137,7 +139,7 @@ const ProfileDetail = ({
                 </CardHeader>
                 <CardContent>
                   <div className="text-md font-bold">
-                    <Address address={profile.owner}
+                    <Address address={profile?.owner}
                       chainId={Number(profile.chainId)} />
                   </div>
                 </CardContent>
