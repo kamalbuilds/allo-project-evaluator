@@ -1,6 +1,4 @@
-## Allo-Project-Evaluator: A Comprehensive Dapp for Evaluating and Managing Projects built using Allo
-
-- This tool lets the users evaluate projects made with different strategies
+## Allo-Project-Evaluator: A Comprehensive Dapp for Evaluating and Managing Projects built using Allo protocol
 
 ### Introduction
 
