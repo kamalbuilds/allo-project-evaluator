@@ -166,7 +166,19 @@ const Table = ({
                       </div>
                     )}
                   </Menu.Item>
-
+                  <Menu.Item>
+                    {({ active }) => (
+                      <div
+                        onClick={() => filterPool("SuperFluid")}
+                        className={classNames(
+                          active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                          'block px-4 py-2 text-sm cursor-pointer'
+                        )}
+                      >
+                        SuperFluid Strategy
+                      </div>
+                    )}
+                  </Menu.Item>
                 </div>
               </Menu.Items>
             </Transition>

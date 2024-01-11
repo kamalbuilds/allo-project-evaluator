@@ -106,14 +106,7 @@ const HomePage = ({
 
             {pool && (
                 <div className="flex-1 space-y-4 p-4 md:p-8 pt-6">
-
-                    {status === 'Ended' && <div className='text-md flex flex-row items-center gap-2 font-normal text-red-500'>
-                        <IoIosWarning color={"rgb(216 15 15)"} />
-                        <div> This Pool has Ended and the Rewards have been distributed</div>
-                    </div>}
             
-                    {pool?.microGrantRecipients && <div className='text-2xl pt-8 font-bold tracking-tight'>Micro Grants Recipients </div>}
-                    {pool.microGrantRecipients && <div className='text-2xl pt-8 font-bold tracking-tight'>Micro Grants Recipients </div>} 
                     <button onClick={sendTransaction}>Call microgrants</button>
 
                     <div className="flex items-center justify-between space-y-2">
@@ -134,6 +127,12 @@ const HomePage = ({
                     <div>
                         <p>{metadataObj?.description}</p>
                     </div>
+
+                    {status === 'Ended' && <div className='text-md flex flex-row items-center gap-2 font-normal text-red-500'>
+                        <IoIosWarning color={"rgb(216 15 15)"} />
+                        <div> This Pool has Ended and the Rewards have been distributed</div>
+                    </div>}
+                    
                     <Tabs defaultValue="overview" className="space-y-4">
                         <TabsList>
                             <TabsTrigger value="overview">Overview</TabsTrigger>

@@ -5,6 +5,7 @@ export const getStrategyTypeFromStrategyName = (
 ): string => {
     if (strategyName === "allov2.MicroGrantsStrategy") return "MicroGrants";
     if (strategyName === "allov2.MicroGrantsGovStrategy") return "Governance";
+    if(strategyName === "allov2.SQFSuperFluidStrategy") return "SuperFluid";
     if (strategyName === "allov2.MicroGrantsHatsStrategy") return "Hats";
 
     return "Custom Strategy";

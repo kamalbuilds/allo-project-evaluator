@@ -57,7 +57,10 @@ const Navbar = () => {
                 </Link>
               </div>
               <div className="hidden lg:flex items-center ml-auto">
-                <ConnectWallet />
+                <ConnectWallet 
+                  modalTitleIconUrl="https://avatars.githubusercontent.com/u/127432533?s=200&v=4"
+                  modalTitle="Connect to Allo Project Evaluator"
+                  />
               </div>
               <div className="flex items-center lg:hidden">
                 {/* Mobile menu button */}
