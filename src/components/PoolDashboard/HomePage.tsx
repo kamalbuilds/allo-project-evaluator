@@ -1,5 +1,5 @@
 "use client"
-import React from 'react';
+import React, { useEffect } from 'react';
 import { CalendarDateRangePicker } from "@/components/date-range-picker";
 import { Overview } from "@/components/overview";
 import { AllocatesList } from "@/components/AllocatesList";
@@ -27,6 +27,9 @@ import Allocatee from '../Allocatee';
 import { IoIosWarning } from "react-icons/io";
 import { MicroGrantsStrategy } from "@allo-team/allo-v2-sdk";
 import { useState } from 'react';
+import {  utils , Signer} from "ethers";
+import {  ThirdwebSDK } from "@thirdweb-dev/sdk";
+import { useSigner, Web3Button } from "@thirdweb-dev/react";
 
 const HomePage = ({
     pool,
@@ -45,8 +48,10 @@ const HomePage = ({
             error: "Error parsing metadata",
         };
     }
-
+    // const signer = useSigner();
+    // console.log(signer,"signer");
     const [strategy, setStrategy] = useState<MicroGrantsStrategy | null>(null);
+    const [sdk,setSdk] = useState<ThirdwebSDK | null>(null);
     // console.log("Pool", pool)
     console.log(pool.microGrantRecipients)
     const status: EPoolStatus = getPoolStatus(
@@ -65,6 +70,36 @@ const HomePage = ({
         setStrategy(strategy);
     };
 
+    const allocations = [
+        { recipientId: "0x9a33fD05dCF5A4096adA6110ad679674408c1d7D", status: 1 },
+        { recipientId: "0x0439427C42a099E7E362D86e2Bbe1eA27300f6Cb", status: 1 },
+        ];
+
+        const txData = strategy?.getBatchAllocationData(allocations);
+        console.log(txData,"txData")
+
+        const sendTransaction = async (txData: any) => {
+            const tx = await sdk.wallet.sendRawTransaction(txData);
+            console.log(tx,"tx")
+            return tx;
+          }
+
+        // Client could be from ethers, viem, etc.
+        // const tx = await sendTransaction({
+        // to: txData.to as string,
+        // data: txData.data,
+        // value: BigInt(txData.value),
+        // });
+
+        useEffect(() => {
+            if(window?.ethereum){
+                const provider = new ethers.providers.Web3Provider(window.ethereum);
+                const signer = provider.getSigner();
+                const sdk = ThirdwebSDK.fromSigner({signer: signer, network: pool.chainId});
+                setSdk(sdk);
+            }
+          }, [pool.chainId]);
+
     return (
         <div className="flex-1 pt-16 overflow-x-hidden overflow-y-auto ">
 
@@ -77,7 +112,7 @@ const HomePage = ({
                     </div>}
 
                     {pool.microGrantRecipients && <div className='text-2xl pt-8 font-bold tracking-tight'>Micro Grants Recipients </div>} 
-
+                    <button onClick={sendTransaction}>Call microgrants</button>
 
                     <div className="flex items-center justify-between space-y-2">
                         <h2 className="text-3xl font-bold tracking-tight">

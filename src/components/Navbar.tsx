@@ -24,7 +24,7 @@ const Navbar = () => {
                   />
                   <Link href="/">
                     <p className="text-2xl font-semibold text-gray-900 ml-2">
-                      QV Explorer
+                      Allo Project-Evaluator
                     </p>
                   </Link>
                 </div>

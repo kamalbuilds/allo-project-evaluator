@@ -100,6 +100,9 @@ export const getProfileDetailDataQuery = gql`
         token
         amount
         strategy
+        createdAt
+        strategyName
+        updatedAt
         metadataProtocol
         metadataPointer
         tokenMetadata
